@@ -1,14 +1,14 @@
 {
-  "name": "@pancakeswap-libs/sdk",
+  "name": "@apeswapfinance/sdk",
   "license": "MIT",
-  "version": "1.0.1",
-  "description": "🛠 An SDK for building applications on top of pancakeswap.",
+  "version": "1.0.3",
+  "description": "🛠 An SDK for building applications on top of apeswap.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/pancakeswap/pancakeswap-sdk.git",
+  "repository": "https://github.com/ApeSwapFinance/apeswap-sdk",
   "keywords": [
     "pancakeswap",
     "ethereum"
