@@ -1,18 +1,18 @@
 {
-  "name": "@sushiswap/sdk",
+  "name": "@apeswapfinance/sdk",
   "license": "MIT",
-  "version": "5.0.0-canary.9",
-  "description": "🛠 An SDK for building applications on top of Sushiswap.",
+  "version": "2.0.0-alpha.2",
+  "description": "🛠 An SDK for building applications on top of ApeSwap.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/sushiswap/sushiswap-sdk",
+  "repository": "https://github.com/ApeSwapFinance/apeswap-sdk",
   "keywords": [
     "uniswap",
     "sushiswap",
-    "ethereum"
+    "apeswap"
   ],
   "module": "dist/sdk.esm.js",
   "scripts": {
