@@ -99,7 +99,7 @@ export const WETH = {
   ),
   [ChainId.MATIC_TESTNET]: new Token(
     ChainId.MATIC_TESTNET,
-    '0x5B67676a984807a212b1c59eBFc9B3568a474F0a',
+    '0x9140243B6572728A142f3e26F9De52F21Be8155f',
     18,
     'WMATIC',
     'Wrapped Matic'
