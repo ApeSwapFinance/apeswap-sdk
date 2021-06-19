@@ -97,10 +97,10 @@ export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.KOVAN]: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506',
   [ChainId.FANTOM]: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506',
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.MATIC]: '0x9E31215F6421c4EED2c04116d430CaF30999680d',
+  [ChainId.MATIC]: '0xC0788A3aD43d79aa53B09c2EaCc313A787d1d607',
   [ChainId.MATIC_TESTNET]: '0x8fCf4B197A9Df7ab4ed511932cA6c8E1a8fe2F1d',
   [ChainId.XDAI]: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506',
-  [ChainId.BSC]: '0xC0788A3aD43d79aa53B09c2EaCc313A787d1d607',
+  [ChainId.BSC]: '0xcf0febd3f17cef5b47b0cd257acf6025c5bff3b7',
   [ChainId.BSC_TESTNET]: '0x3380ae82e39e42ca34ebed69af67faa0683bb5c1',
   [ChainId.ARBITRUM]: '',
   [ChainId.MOONBASE]: '0xeB5c2BB5E83B51d83F3534Ae21E84336B8B376ef',
@@ -249,7 +249,7 @@ export const THREE = JSBI.BigInt(3)
 export const FIVE = JSBI.BigInt(5)
 export const TEN = JSBI.BigInt(10)
 export const _100 = JSBI.BigInt(100)
-export const _997 = JSBI.BigInt(997)
+export const _998 = JSBI.BigInt(998)
 export const _1000 = JSBI.BigInt(1000)
 
 export enum SolidityType {
