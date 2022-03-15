@@ -10,7 +10,7 @@ First clone the repository:
 git clone https://github.com/ApeSwapFinance/apeswap-sdk.git
 ```
 
-Move into the pancakeswap-sdk working directory
+Move into the apeswap-sdk working directory
 
 ```sh
 cd apeswap-sdk/
