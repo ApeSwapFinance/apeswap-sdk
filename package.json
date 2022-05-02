@@ -1,5 +1,5 @@
 {
-  "name": "@apeswapfinance/sdk",
+  "name": "@ape.swap/sdk",
   "license": "MIT",
   "version": "1.0.4",
   "description": "🛠 An SDK for building applications on top of apeswap.",
