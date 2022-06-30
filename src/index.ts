@@ -20,4 +20,5 @@ export {
 export * from './errors'
 export * from './entities'
 export * from './router'
+export * from './smartRouter'
 export * from './fetcher'
