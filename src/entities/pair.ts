@@ -14,51 +14,58 @@ import {
   _998,
   _1000,
   ChainId,
-  FACTORY_ADDRESS,
-  INIT_CODE_HASH
+  SmartRouter,
+  SMART_FACTORY_ADDRESS,
+  SMART_INIT_CODE_HASH
 } from '../constants'
 import { sqrt, parseBigintIsh } from '../utils'
 import { InsufficientReservesError, InsufficientInputAmountError } from '../errors'
 import { Token } from './token'
 
-let PAIR_ADDRESS_CACHE: { [token0Address: string]: { [token1Address: string]: string } } = {}
+let PAIR_ADDRESS_CACHE: { [smartRouter: string]: { [token0Address: string]: { [token1Address: string]: string } } } = {}
 
 export class Pair {
   public readonly liquidityToken: Token
   private readonly tokenAmounts: [TokenAmount, TokenAmount]
+  private readonly smartRouter: SmartRouter
 
-  public static getAddress(tokenA: Token, tokenB: Token): string {
+  public static getAddress(tokenA: Token, tokenB: Token, smartRouter: SmartRouter): string {
     const tokens = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA] // does safety checks
 
-    if (PAIR_ADDRESS_CACHE?.[tokens[0].address]?.[tokens[1].address] === undefined) {
+    // Need to add the smart router to cache or it will always return the cached address
+    if (PAIR_ADDRESS_CACHE?.[smartRouter]?.[tokens[0].address]?.[tokens[1].address] === undefined) {
       PAIR_ADDRESS_CACHE = {
         ...PAIR_ADDRESS_CACHE,
-        [tokens[0].address]: {
-          ...PAIR_ADDRESS_CACHE?.[tokens[0].address],
-          [tokens[1].address]: getCreate2Address(
-            FACTORY_ADDRESS[tokenA.chainId],
-            keccak256(['bytes'], [pack(['address', 'address'], [tokens[0].address, tokens[1].address])]),
-            INIT_CODE_HASH[tokenA.chainId]
-          )
+        [smartRouter]: {
+          ...PAIR_ADDRESS_CACHE?.[smartRouter],
+          [tokens[0].address]: {
+            ...PAIR_ADDRESS_CACHE?.[smartRouter]?.[tokens[0].address],
+            [tokens[1].address]: getCreate2Address(
+              SMART_FACTORY_ADDRESS[tokenA.chainId][smartRouter],
+              keccak256(['bytes'], [pack(['address', 'address'], [tokens[0].address, tokens[1].address])]),
+              SMART_INIT_CODE_HASH[tokenA.chainId][smartRouter]
+            )
+          }
         }
       }
     }
 
-    return PAIR_ADDRESS_CACHE[tokens[0].address][tokens[1].address]
+    return PAIR_ADDRESS_CACHE[smartRouter][tokens[0].address][tokens[1].address]
   }
 
-  public constructor(tokenAmountA: TokenAmount, tokenAmountB: TokenAmount) {
+  public constructor(tokenAmountA: TokenAmount, tokenAmountB: TokenAmount, smartRouter: SmartRouter) {
     const tokenAmounts = tokenAmountA.token.sortsBefore(tokenAmountB.token) // does safety checks
       ? [tokenAmountA, tokenAmountB]
       : [tokenAmountB, tokenAmountA]
     this.liquidityToken = new Token(
       tokenAmounts[0].token.chainId,
-      Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token),
+      Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token, smartRouter),
       18,
       'APE-LP',
       'ApeSwap LP'
     )
     this.tokenAmounts = tokenAmounts as [TokenAmount, TokenAmount]
+    this.smartRouter = smartRouter as SmartRouter
   }
 
   /**
@@ -81,6 +88,14 @@ export class Pair {
    */
   public get token1Price(): Price {
     return new Price(this.token1, this.token0, this.tokenAmounts[1].raw, this.tokenAmounts[0].raw)
+  }
+
+  /**
+   * Returns the current router of the pair
+   */
+
+  public get router(): SmartRouter {
+    return this.smartRouter
   }
 
   /**
@@ -137,7 +152,10 @@ export class Pair {
     if (JSBI.equal(outputAmount.raw, ZERO)) {
       throw new InsufficientInputAmountError()
     }
-    return [outputAmount, new Pair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount))]
+    return [
+      outputAmount,
+      new Pair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount), this.smartRouter)
+    ]
   }
 
   public getInputAmount(outputAmount: TokenAmount): [TokenAmount, Pair] {
@@ -158,7 +176,10 @@ export class Pair {
       outputAmount.token.equals(this.token0) ? this.token1 : this.token0,
       JSBI.add(JSBI.divide(numerator, denominator), ONE)
     )
-    return [inputAmount, new Pair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount))]
+    return [
+      inputAmount,
+      new Pair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount), this.smartRouter)
+    ]
   }
 
   public getLiquidityMinted(
@@ -224,53 +245,5 @@ export class Pair {
       token,
       JSBI.divide(JSBI.multiply(liquidity.raw, this.reserveOf(token).raw), totalSupplyAdjusted.raw)
     )
-  }
-}
-
-let PANCAKE_V1_PAIR_ADDRESS_CACHE: { [token0Address: string]: { [token1Address: string]: string } } = {}
-
-export class PancakeV1Pair extends Pair {
-  public static getAddress(tokenA: Token, tokenB: Token): string {
-    const tokens = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA] // does safety checks
-
-    if (PANCAKE_V1_PAIR_ADDRESS_CACHE?.[tokens[0].address]?.[tokens[1].address] === undefined) {
-      PANCAKE_V1_PAIR_ADDRESS_CACHE = {
-        ...PANCAKE_V1_PAIR_ADDRESS_CACHE,
-        [tokens[0].address]: {
-          ...PANCAKE_V1_PAIR_ADDRESS_CACHE?.[tokens[0].address],
-          [tokens[1].address]: getCreate2Address(
-            '0xBCfCcbde45cE874adCB698cC183deBcF17952812',
-            keccak256(['bytes'], [pack(['address', 'address'], [tokens[0].address, tokens[1].address])]),
-            '0xd0d4c4cd0848c93cb4fd1f498d7013ee6bfb25783ea21593d5834f5d250ece66'
-          )
-        }
-      }
-    }
-
-    return PANCAKE_V1_PAIR_ADDRESS_CACHE[tokens[0].address][tokens[1].address]
-  }
-}
-
-let PANCAKE_V2_PAIR_ADDRESS_CACHE: { [token0Address: string]: { [token1Address: string]: string } } = {}
-
-export class PancakeV2Pair extends PancakeV1Pair {
-  public static getAddress(tokenA: Token, tokenB: Token): string {
-    const tokens = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA] // does safety checks
-
-    if (PANCAKE_V2_PAIR_ADDRESS_CACHE?.[tokens[0].address]?.[tokens[1].address] === undefined) {
-      PANCAKE_V2_PAIR_ADDRESS_CACHE = {
-        ...PANCAKE_V2_PAIR_ADDRESS_CACHE,
-        [tokens[0].address]: {
-          ...PANCAKE_V2_PAIR_ADDRESS_CACHE?.[tokens[0].address],
-          [tokens[1].address]: getCreate2Address(
-            '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',
-            keccak256(['bytes'], [pack(['address', 'address'], [tokens[0].address, tokens[1].address])]),
-            '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5'
-          )
-        }
-      }
-    }
-
-    return PANCAKE_V2_PAIR_ADDRESS_CACHE[tokens[0].address][tokens[1].address]
   }
 }

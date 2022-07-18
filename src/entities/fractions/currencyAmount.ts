@@ -22,6 +22,15 @@ export class CurrencyAmount extends Fraction {
     return new CurrencyAmount(ETHER, amount)
   }
 
+  /**
+   * Returns a new currency amount instance from the unitless amount of token, i.e. the raw amount
+   * @param currency the currency in the amount
+   * @param rawAmount the raw token or ether amount
+   */
+  public static fromRawAmount<T extends Currency>(currency: T, rawAmount: BigintIsh): CurrencyAmount {
+    return new CurrencyAmount(currency, rawAmount)
+  }
+
   // amount _must_ be raw, i.e. in the native representation
   protected constructor(currency: Currency, amount: BigintIsh) {
     const parsedAmount = parseBigintIsh(amount)

@@ -1,13 +1,24 @@
 import invariant from 'tiny-invariant'
-import { ChainId, WETH as _WETH, TradeType, Rounding, Token, TokenAmount, Pair, Route, Trade } from '../src'
+import {
+  ChainId,
+  WETH as _WETH,
+  TradeType,
+  Rounding,
+  Token,
+  TokenAmount,
+  Pair,
+  Route,
+  Trade,
+  SmartRouter
+} from '../src'
 
 const ADDRESSES = [
   '0x0000000000000000000000000000000000000001',
   '0x0000000000000000000000000000000000000002',
   '0x0000000000000000000000000000000000000003'
 ]
-const CHAIN_ID = ChainId.RINKEBY
-const WETH = _WETH[ChainId.RINKEBY]
+const CHAIN_ID = ChainId.BSC_TESTNET
+const WETH = _WETH[ChainId.BSC_TESTNET]
 const DECIMAL_PERMUTATIONS: [number, number, number][] = [
   [0, 0, 0],
   [0, 9, 18],
@@ -36,15 +47,18 @@ describe('entities', () => {
         pairs = [
           new Pair(
             new TokenAmount(tokens[0], decimalize(1, tokens[0].decimals)),
-            new TokenAmount(tokens[1], decimalize(1, tokens[1].decimals))
+            new TokenAmount(tokens[1], decimalize(1, tokens[1].decimals)),
+            SmartRouter.APE
           ),
           new Pair(
             new TokenAmount(tokens[1], decimalize(1, tokens[1].decimals)),
-            new TokenAmount(tokens[2], decimalize(1, tokens[2].decimals))
+            new TokenAmount(tokens[2], decimalize(1, tokens[2].decimals)),
+            SmartRouter.APE
           ),
           new Pair(
             new TokenAmount(tokens[2], decimalize(1, tokens[2].decimals)),
-            new TokenAmount(WETH, decimalize(1234, WETH.decimals))
+            new TokenAmount(WETH, decimalize(1234, WETH.decimals)),
+            SmartRouter.APE
           )
         ]
       })
@@ -104,7 +118,8 @@ describe('entities', () => {
             [
               new Pair(
                 new TokenAmount(tokens[1], decimalize(5, tokens[1].decimals)),
-                new TokenAmount(WETH, decimalize(10, WETH.decimals))
+                new TokenAmount(WETH, decimalize(10, WETH.decimals)),
+                SmartRouter.APE
               )
             ],
             tokens[1]
@@ -116,7 +131,6 @@ describe('entities', () => {
           expect(trade.tradeType).toEqual(TradeType.EXACT_INPUT)
           expect(trade.inputAmount).toEqual(inputAmount)
           expect(trade.outputAmount).toEqual(expectedOutputAmount)
-
           expect(trade.executionPrice.toSignificant(18)).toEqual('1.66249791562447891')
           expect(trade.executionPrice.invert().toSignificant(18)).toEqual('0.601504513540621866')
           expect(trade.executionPrice.quote(inputAmount)).toEqual(expectedOutputAmount)
@@ -158,7 +172,8 @@ describe('entities', () => {
                     WETH,
                     decimalize(10, WETH.decimals) +
                       (tokens[1].decimals === 9 ? BigInt('30090280812437312') : BigInt('30090270812437322'))
-                  )
+                  ),
+                  SmartRouter.APE
                 )
               ],
               tokens[1]

@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn
+  /usr/local/bin/node /usr/local/bin/yarn add @jsbi
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -14,21 +14,23 @@ Platform:
   darwin arm64
 
 Trace: 
-  Error: Failed to replace env in config: ${NPM_TOKEN}
-      at /usr/local/lib/node_modules/yarn/lib/cli.js:99004:13
-      at String.replace (<anonymous>)
-      at envReplace (/usr/local/lib/node_modules/yarn/lib/cli.js:98999:16)
-      at Function.normalizeConfig (/usr/local/lib/node_modules/yarn/lib/cli.js:31930:69)
-      at NpmRegistry.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:31960:34)
-      at Generator.next (<anonymous>)
-      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:310:30)
-      at /usr/local/lib/node_modules/yarn/lib/cli.js:321:13
+  Error: https://npm.pkg.github.com/ApeSwapFinance/@jsbi: Permission denied
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:67029:18)
+      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140883:22)
+      at Request.emit (node:events:390:28)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141855:10)
+      at Request.emit (node:events:390:28)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141777:12)
+      at Object.onceWrapper (node:events:509:28)
+      at IncomingMessage.emit (node:events:402:35)
+      at endReadableNT (node:internal/streams/readable:1343:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
 
 npm manifest: 
   {
     "name": "@apeswapfinance/sdk",
     "license": "MIT",
-    "version": "2.0.0-alpha.21",
+    "version": "4.0.0-alpha.15",
     "description": "🛠 An SDK for building applications on top of ApeSwap.",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
