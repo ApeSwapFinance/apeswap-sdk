@@ -81,7 +81,7 @@ export const SMART_FACTORY_ADDRESS: Record<ChainId, Record<SmartRouter, string>>
     [SmartRouter.BISWAP]: '',
     [SmartRouter.QUICKSWAP]: '',
     [SmartRouter.UNISWAP]: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
-    [SmartRouter.SUSHISWAP]: '0xc0aee478e3658e2610c5f7a4a2e1777ce9e4f2ac'
+    [SmartRouter.SUSHISWAP]: '0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac'
   },
   [ChainId.BSC]: {
     [SmartRouter.APE]: '0x0841BD0B734E4F5853f0dD8d7Ea041c241fb0Da6',
