@@ -27,7 +27,8 @@ export enum SmartRouter {
   PANCAKE = 'PANCAKE',
   BISWAP = 'BISWAP',
   QUICKSWAP = 'QUICKSWAP',
-  UNISWAP = 'UNISWAP'
+  UNISWAP = 'UNISWAP',
+  SUSHISWAP = 'SUSHISWAP'
 }
 
 export const SMART_INIT_CODE_HASH: Record<ChainId, Record<SmartRouter, string>> = {
@@ -36,35 +37,40 @@ export const SMART_INIT_CODE_HASH: Record<ChainId, Record<SmartRouter, string>> 
     [SmartRouter.PANCAKE]: '',
     [SmartRouter.BISWAP]: '',
     [SmartRouter.QUICKSWAP]: '',
-    [SmartRouter.UNISWAP]: '0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f'
+    [SmartRouter.UNISWAP]: '0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f',
+    [SmartRouter.SUSHISWAP]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303'
   },
   [ChainId.BSC]: {
     [SmartRouter.APE]: '0xf4ccce374816856d11f00e4069e7cada164065686fbef53c6167a63ec2fd8c5b',
     [SmartRouter.PANCAKE]: '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5',
     [SmartRouter.BISWAP]: '0xfea293c909d87cd4153593f077b76bb7e94340200f4ee84211ae8e4f9bd7ffdf',
     [SmartRouter.QUICKSWAP]: '',
-    [SmartRouter.UNISWAP]: ''
+    [SmartRouter.UNISWAP]: '',
+    [SmartRouter.SUSHISWAP]: ''
   },
   [ChainId.BSC_TESTNET]: {
     [SmartRouter.APE]: '0xf4ccce374816856d11f00e4069e7cada164065686fbef53c6167a63ec2fd8c5b',
     [SmartRouter.PANCAKE]: '',
     [SmartRouter.BISWAP]: '',
     [SmartRouter.QUICKSWAP]: '',
-    [SmartRouter.UNISWAP]: ''
+    [SmartRouter.UNISWAP]: '',
+    [SmartRouter.SUSHISWAP]: ''
   },
   [ChainId.MATIC]: {
     [SmartRouter.APE]: '0x511f0f358fe530cda0859ec20becf391718fdf5a329be02f4c95361f3d6a42d8',
     [SmartRouter.PANCAKE]: '',
     [SmartRouter.BISWAP]: '',
     [SmartRouter.QUICKSWAP]: '0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f',
-    [SmartRouter.UNISWAP]: ''
+    [SmartRouter.UNISWAP]: '',
+    [SmartRouter.SUSHISWAP]: ''
   },
   [ChainId.MATIC_TESTNET]: {
     [SmartRouter.APE]: '0x511f0f358fe530cda0859ec20becf391718fdf5a329be02f4c95361f3d6a42d8',
     [SmartRouter.PANCAKE]: '',
     [SmartRouter.BISWAP]: '',
     [SmartRouter.QUICKSWAP]: '',
-    [SmartRouter.UNISWAP]: ''
+    [SmartRouter.UNISWAP]: '',
+    [SmartRouter.SUSHISWAP]: ''
   }
 }
 
@@ -74,35 +80,40 @@ export const SMART_FACTORY_ADDRESS: Record<ChainId, Record<SmartRouter, string>>
     [SmartRouter.PANCAKE]: '',
     [SmartRouter.BISWAP]: '',
     [SmartRouter.QUICKSWAP]: '',
-    [SmartRouter.UNISWAP]: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'
+    [SmartRouter.UNISWAP]: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
+    [SmartRouter.SUSHISWAP]: '0xc0aee478e3658e2610c5f7a4a2e1777ce9e4f2ac'
   },
   [ChainId.BSC]: {
     [SmartRouter.APE]: '0x0841BD0B734E4F5853f0dD8d7Ea041c241fb0Da6',
     [SmartRouter.PANCAKE]: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',
     [SmartRouter.BISWAP]: '0x858E3312ed3A876947EA49d572A7C42DE08af7EE',
     [SmartRouter.QUICKSWAP]: '',
-    [SmartRouter.UNISWAP]: ''
+    [SmartRouter.UNISWAP]: '',
+    [SmartRouter.SUSHISWAP]: ''
   },
   [ChainId.BSC_TESTNET]: {
     [SmartRouter.APE]: '0x152349604d49c2af10adee94b918b051104a143e',
     [SmartRouter.PANCAKE]: '',
     [SmartRouter.BISWAP]: '',
     [SmartRouter.QUICKSWAP]: '',
-    [SmartRouter.UNISWAP]: ''
+    [SmartRouter.UNISWAP]: '',
+    [SmartRouter.SUSHISWAP]: ''
   },
   [ChainId.MATIC]: {
     [SmartRouter.APE]: '0xCf083Be4164828f00cAE704EC15a36D711491284',
     [SmartRouter.PANCAKE]: '',
     [SmartRouter.BISWAP]: '',
     [SmartRouter.QUICKSWAP]: '0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32',
-    [SmartRouter.UNISWAP]: ''
+    [SmartRouter.UNISWAP]: '',
+    [SmartRouter.SUSHISWAP]: ''
   },
   [ChainId.MATIC_TESTNET]: {
     [SmartRouter.APE]: '0xe145a77c21437e3FD32ce2731833114F0B53405b',
     [SmartRouter.PANCAKE]: '',
     [SmartRouter.BISWAP]: '',
     [SmartRouter.QUICKSWAP]: '',
-    [SmartRouter.UNISWAP]: ''
+    [SmartRouter.UNISWAP]: '',
+    [SmartRouter.SUSHISWAP]: ''
   }
 }
 
@@ -112,42 +123,40 @@ export const SMART_ROUTER_ADDRESS: Record<ChainId, Record<SmartRouter, string>> 
     [SmartRouter.PANCAKE]: '',
     [SmartRouter.BISWAP]: '',
     [SmartRouter.QUICKSWAP]: '',
-    [SmartRouter.UNISWAP]: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'
-  },
-  [ChainId.MAINNET]: {
-    [SmartRouter.APE]: '0x5f509a3C3F16dF2Fba7bF84dEE1eFbce6BB85587',
-    [SmartRouter.PANCAKE]: '',
-    [SmartRouter.BISWAP]: '',
-    [SmartRouter.QUICKSWAP]: '',
-    [SmartRouter.UNISWAP]: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'
+    [SmartRouter.UNISWAP]: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
+    [SmartRouter.SUSHISWAP]: '0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F'
   },
   [ChainId.BSC]: {
     [SmartRouter.APE]: '0xcf0febd3f17cef5b47b0cd257acf6025c5bff3b7',
     [SmartRouter.PANCAKE]: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
     [SmartRouter.BISWAP]: '0x3a6d8cA21D1CF76F653A67577FA0D27453350dD8',
     [SmartRouter.QUICKSWAP]: '',
-    [SmartRouter.UNISWAP]: ''
+    [SmartRouter.UNISWAP]: '',
+    [SmartRouter.SUSHISWAP]: ''
   },
   [ChainId.BSC_TESTNET]: {
     [SmartRouter.APE]: '0x3380ae82e39e42ca34ebed69af67faa0683bb5c1',
     [SmartRouter.PANCAKE]: '0xD99D1c33F9fC3444f8101754aBC46c52416550D1',
     [SmartRouter.BISWAP]: '',
     [SmartRouter.QUICKSWAP]: '',
-    [SmartRouter.UNISWAP]: ''
+    [SmartRouter.UNISWAP]: '',
+    [SmartRouter.SUSHISWAP]: ''
   },
   [ChainId.MATIC]: {
     [SmartRouter.APE]: '0xC0788A3aD43d79aa53B09c2EaCc313A787d1d607',
     [SmartRouter.PANCAKE]: '',
     [SmartRouter.BISWAP]: '',
     [SmartRouter.QUICKSWAP]: '0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff',
-    [SmartRouter.UNISWAP]: ''
+    [SmartRouter.UNISWAP]: '',
+    [SmartRouter.SUSHISWAP]: ''
   },
   [ChainId.MATIC_TESTNET]: {
     [SmartRouter.APE]: '0x8fCf4B197A9Df7ab4ed511932cA6c8E1a8fe2F1d',
     [SmartRouter.PANCAKE]: '',
     [SmartRouter.BISWAP]: '',
     [SmartRouter.QUICKSWAP]: '',
-    [SmartRouter.UNISWAP]: ''
+    [SmartRouter.UNISWAP]: '',
+    [SmartRouter.SUSHISWAP]: ''
   }
 }
 
