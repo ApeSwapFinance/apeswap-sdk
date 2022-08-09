@@ -6,7 +6,7 @@ import { CurrencyAmount, ETHER, Percent, Trade } from './entities'
 /**
  * Options for producing the arguments to send call to the router.
  */
-export interface SmartTradeOptions {
+export interface BonusTradeOptions {
   /**
    * How much the execution price is allowed to move unfavorably from the trade execution price.
    */
@@ -33,7 +33,7 @@ export interface SmartTradeOptions {
   masterInput: string
 }
 
-export interface SmartTradeOptionsDeadline extends Omit<SmartTradeOptions, 'ttl'> {
+export interface SmartTradeOptionsDeadline extends Omit<BonusTradeOptions, 'ttl'> {
   /**
    * When the transaction expires.
    * This is an atlernate to specifying the ttl, for when you do not want to use local time.
@@ -68,7 +68,7 @@ const ZERO_HEX = '0x0'
 /**
  * Represents the Uniswap V2 Router, and has static methods for helping execute trades.
  */
-export abstract class SmartRouter {
+export abstract class BonusRouter {
   /**
    * Cannot be constructed.
    */
@@ -78,7 +78,7 @@ export abstract class SmartRouter {
    * @param trade to produce call parameters for
    * @param options options for the call parameters
    */
-  public static swapCallParameters(trade: Trade, options: SmartTradeOptions | SmartTradeOptionsDeadline): SmartSwapParameters {
+  public static swapCallParameters(trade: Trade, options: BonusTradeOptions | SmartTradeOptionsDeadline): SmartSwapParameters {
     const etherIn = trade.inputAmount.currency === ETHER
     const etherOut = trade.outputAmount.currency === ETHER
     // the router does not support both ether in and out
