@@ -1,0 +1,207 @@
+import { ChainId, ZapType } from './constants'
+import invariant from 'tiny-invariant'
+import { validateAndParseAddress } from './utils'
+import { Currency, CurrencyAmount, ETHER, Pair, Percent, Token, TokenAmount, WETH } from './entities'
+import JSBI from 'jsbi'
+
+/**
+ * Options for producing the arguments to send call to zap.
+ */
+export interface ZapOptions {
+  /**
+   * How much the execution price is allowed to move unfavorably from the trade execution price.
+   */
+  allowedSlippage: Percent
+  /**
+   * How long the zap is valid until it expires, in seconds.
+   * This will be used to produce a `deadline` parameter which is computed from when the zap call parameters
+   * are generated.
+   */
+  ttl: number
+  /**
+   * The account that should receive the output of the zap.
+   */
+  recipient: string
+
+  zapType: ZapType
+
+  poolAddress?: string
+
+  billAddress?: string
+}
+
+export interface ZapOptionsDeadline extends Omit<ZapOptions, 'ttl'> {
+  /**
+   * When the transaction expires.
+   * This is an atlernate to specifying the ttl, for when you do not want to use local time.
+   */
+  deadline: number
+}
+
+/**
+ * The parameters to use in the call to the Uniswap V2 Router to execute a trade.
+ */
+export interface ZapParameters {
+  /**
+   * The method to call on the Uniswap V2 Router.
+   */
+  methodName: string
+  /**
+   * The arguments to pass to the method, all hex encoded.
+   */
+  args: (string | string[] | number[])[]
+  /**
+   * The amount of wei to send in hex.
+   */
+  value: string
+}
+
+type CurrencyOut = {
+  outputCurrency: Token
+  path: Token[]
+  outputAmount: CurrencyAmount
+  minOutputAmount: string
+}
+
+type MergedZap = {
+  currencyIn: {
+    currency: Currency
+    inputAmount: string | JSBI
+  }
+  currencyOut1: CurrencyOut
+  currencyOut2: CurrencyOut
+  pairOut: {
+    pair: Pair
+    minInAmount: { token1: string; token2: string }
+    totalPairSupply: TokenAmount
+    liquidityMinted: TokenAmount
+  }
+  chainId: ChainId
+}
+
+const ZERO_HEX = '0x0'
+
+export abstract class ZapV1 {
+  /**
+   * Cannot be constructed.
+   */
+  private constructor() {}
+  /**
+   * Produces the on-chain method name to call and the hex encoded parameters to pass as arguments for a given trade.
+   * @param zap get zap values
+   * @param options options for the call parameters
+   */
+  public static zapCallParameters(zap: MergedZap, options: ZapOptions | ZapOptionsDeadline): ZapParameters {
+    invariant(zap, 'null Zap')
+
+    const { chainId, currencyIn, currencyOut1, currencyOut2, pairOut } = zap
+    const { zapType } = options
+
+    invariant(chainId !== undefined, 'CHAIN_ID')
+
+    const etherIn = currencyIn.currency === ETHER
+
+    const path1 = currencyOut1.path.map(token => token.address)
+    const path2 = currencyOut2.path.map(token => token.address)
+    const currencyInToken: Token = etherIn ? WETH[chainId] : (currencyIn?.currency as Token)
+    const to: string = validateAndParseAddress(options.recipient)
+    const poolAddress = options?.poolAddress
+    const billAddress = options?.billAddress
+
+    const deadline =
+      'ttl' in options
+        ? `0x${(Math.floor(new Date().getTime() / 1000) + options.ttl).toString(16)}`
+        : `0x${options.deadline.toString(16)}`
+
+    let methodName: string
+    let args: (string | string[] | number[])[]
+    let value: string
+    switch (zapType) {
+      case ZapType.ZAP:
+        if (etherIn) {
+          methodName = 'zapNative'
+          args = [
+            [currencyOut1.outputCurrency.address, currencyOut2.outputCurrency.address],
+            path1,
+            path2,
+            [currencyOut1.minOutputAmount, currencyOut2.minOutputAmount],
+            [pairOut.minInAmount.token1, pairOut.minInAmount.token2],
+            to,
+            deadline
+          ]
+          value = currencyIn.inputAmount.toString()
+        } else {
+          methodName = 'zap'
+          args = [
+            currencyInToken.address,
+            currencyIn.inputAmount.toString(),
+            [currencyOut1.outputCurrency.address, currencyOut2.outputCurrency.address],
+            path1,
+            path2,
+            [currencyOut1.minOutputAmount, currencyOut2.minOutputAmount],
+            [pairOut.minInAmount.token1, pairOut.minInAmount.token2],
+            to,
+            deadline
+          ]
+          value = ZERO_HEX
+        }
+        break
+      case ZapType.ZAP_SINGLE_ASSET_POOL:
+        invariant(poolAddress, 'Missing Pool Address')
+        if (etherIn) {
+          methodName = 'zapSingleAssetPoolNative'
+          args = [path1, currencyOut1.minOutputAmount, deadline, poolAddress]
+          value = currencyIn.inputAmount.toString()
+        } else {
+          methodName = 'zapSingleAssetPool'
+          args = [
+            currencyInToken.address,
+            currencyIn.inputAmount.toString(),
+            path1,
+            currencyOut1.minOutputAmount,
+            deadline,
+            poolAddress
+          ]
+          value = ZERO_HEX
+        }
+        break
+      case ZapType.ZAP_T_BILL:
+        invariant(billAddress, 'Missing Bill Address')
+        if (etherIn) {
+          methodName = 'zapTBillNative'
+          args = [
+            [currencyOut1.outputCurrency.address, currencyOut2.outputCurrency.address],
+            path1,
+            path2,
+            [currencyOut1.minOutputAmount, currencyOut2.minOutputAmount],
+            [pairOut.minInAmount.token1, pairOut.minInAmount.token2],
+            deadline,
+            billAddress,
+            '100000000000000000000'
+          ]
+          value = currencyIn.inputAmount.toString()
+        } else {
+          methodName = 'zapTBill'
+          args = [
+            currencyInToken.address,
+            currencyIn.inputAmount.toString(),
+            [currencyOut1.outputCurrency.address, currencyOut2.outputCurrency.address],
+            path1,
+            path2,
+            [currencyOut1.minOutputAmount, currencyOut2.minOutputAmount],
+            [pairOut.minInAmount.token1, pairOut.minInAmount.token2],
+            deadline,
+            billAddress,
+            '1000000000000000000000'
+          ]
+          value = ZERO_HEX
+        }
+        break
+      default:
+        methodName = ''
+        args = []
+        value = '0'
+    }
+    return { methodName, args, value }
+  }
+}
