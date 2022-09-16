@@ -61,8 +61,8 @@ export class Pair {
       tokenAmounts[0].token.chainId,
       Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token, smartRouter),
       18,
-      'APE-LP',
-      'ApeSwap LP'
+      `${smartRouter || 'Ape'}-LP`,
+      `${smartRouter || 'Apeswap'} LPs`
     )
     this.tokenAmounts = tokenAmounts as [TokenAmount, TokenAmount]
     this.smartRouter = smartRouter as SmartRouter

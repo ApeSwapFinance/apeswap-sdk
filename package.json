@@ -1,7 +1,7 @@
 {
-  "name": "@apeswapfinance/sdk",
+  "name": "@ape.swap/sdk",
   "license": "MIT",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "🛠 An SDK for building applications on top of ApeSwap.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -29,7 +29,8 @@
     "jsbi": "^3.1.1",
     "tiny-invariant": "^1.1.0",
     "tiny-warning": "^1.0.3",
-    "toformat": "^2.0.0"
+    "toformat": "^2.0.0",
+    "yalc": "^1.0.0-pre.53"
   },
   "peerDependencies": {
     "@ethersproject/address": "^5.0.0-beta",
