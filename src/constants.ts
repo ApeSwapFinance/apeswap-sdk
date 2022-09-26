@@ -220,7 +220,7 @@ export const ZAP_ADDRESS: Record<ChainId, string> = {
   [ChainId.BSC_TESTNET]: '0xEe0e3270d2C62AC598E435212a5f87A431e4dDcF',
   [ChainId.MATIC]: '0x7c9eCf17694cB2f91cC24ca5b2fC1ED0cd48EDCb',
   [ChainId.MATIC_TESTNET]: '',
-  [ChainId.TLOS]: ''
+  [ChainId.TLOS]: '0x10614e4395AAc006ca0Ef4970d1412e8e921d911'
 }
 
 // TODO: Cleanup legacy code and swap constants on the FE
