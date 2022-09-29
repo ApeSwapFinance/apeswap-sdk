@@ -25,9 +25,11 @@ export interface ZapOptions {
 
   zapType: ZapType
 
-  poolAddress?: string
+  // When zapping into a contract we need to pass it
+  stakingContractAddress?: string
 
-  billAddress?: string
+  // PID for when staking into chef contracts
+  stakingPid?: string
 
   // This is the max price for a bill to be zapped
   maxPrice?: string
@@ -108,8 +110,8 @@ export abstract class ZapV1 {
     const path2 = currencyOut2.path.map(token => token.address)
     const currencyInToken: Token = etherIn ? WETH[chainId] : (currencyIn?.currency as Token)
     const to: string = validateAndParseAddress(options.recipient)
-    const poolAddress = options?.poolAddress
-    const billAddress = options?.billAddress
+    const stakingContractAddress = options?.stakingContractAddress
+    const stakingPid = options?.stakingPid
 
     const deadline =
       'ttl' in options
@@ -150,10 +152,10 @@ export abstract class ZapV1 {
         }
         break
       case ZapType.ZAP_SINGLE_ASSET_POOL:
-        invariant(poolAddress, 'Missing Pool Address')
+        invariant(stakingContractAddress, 'Missing Pool Address')
         if (etherIn) {
           methodName = 'zapSingleAssetPoolNative'
-          args = [path1, currencyOut1.minOutputAmount, deadline, poolAddress]
+          args = [path1, currencyOut1.minOutputAmount, deadline, stakingContractAddress]
           value = currencyIn.inputAmount.toString()
         } else {
           methodName = 'zapSingleAssetPool'
@@ -163,13 +165,13 @@ export abstract class ZapV1 {
             path1,
             currencyOut1.minOutputAmount,
             deadline,
-            poolAddress
+            stakingContractAddress
           ]
           value = ZERO_HEX
         }
         break
       case ZapType.ZAP_LP_POOL:
-        invariant(poolAddress, 'Missing Pool Address')
+        invariant(stakingContractAddress, 'Missing Pool Address')
         if (etherIn) {
           methodName = 'zapLPPoolNative'
           args = [
@@ -179,7 +181,7 @@ export abstract class ZapV1 {
             [currencyOut1.minOutputAmount, currencyOut2.minOutputAmount],
             [pairOut.minInAmount.token1, pairOut.minInAmount.token2],
             deadline,
-            poolAddress
+            stakingContractAddress
           ]
           value = currencyIn.inputAmount.toString()
         } else {
@@ -193,13 +195,13 @@ export abstract class ZapV1 {
             [currencyOut1.minOutputAmount, currencyOut2.minOutputAmount],
             [pairOut.minInAmount.token1, pairOut.minInAmount.token2],
             deadline,
-            poolAddress
+            stakingContractAddress
           ]
           value = ZERO_HEX
         }
         break
       case ZapType.ZAP_T_BILL:
-        invariant(billAddress, 'Missing Bill Address')
+        invariant(stakingContractAddress, 'Missing Bill Address')
         if (etherIn) {
           methodName = 'zapTBillNative'
           args = [
@@ -209,7 +211,7 @@ export abstract class ZapV1 {
             [currencyOut1.minOutputAmount, currencyOut2.minOutputAmount],
             [pairOut.minInAmount.token1, pairOut.minInAmount.token2],
             deadline,
-            billAddress,
+            stakingContractAddress,
             maxPrice || '0'
           ]
           value = currencyIn.inputAmount.toString()
@@ -224,8 +226,41 @@ export abstract class ZapV1 {
             [currencyOut1.minOutputAmount, currencyOut2.minOutputAmount],
             [pairOut.minInAmount.token1, pairOut.minInAmount.token2],
             deadline,
-            billAddress,
+            stakingContractAddress,
             maxPrice || '0'
+          ]
+          value = ZERO_HEX
+        }
+        break
+      case ZapType.ZAP_MINI_APE:
+        invariant(stakingContractAddress, 'Missing MiniApe Address')
+        invariant(stakingPid, 'Missing contract PID')
+        if (etherIn) {
+          methodName = 'zapMiniApeV2Native'
+          args = [
+            [currencyOut1.outputCurrency.address, currencyOut2.outputCurrency.address],
+            path1,
+            path2,
+            [currencyOut1.minOutputAmount, currencyOut2.minOutputAmount],
+            [pairOut.minInAmount.token1, pairOut.minInAmount.token2],
+            deadline,
+            stakingContractAddress,
+            stakingPid
+          ]
+          value = currencyIn.inputAmount.toString()
+        } else {
+          methodName = 'zapMiniApeV2'
+          args = [
+            currencyInToken.address,
+            currencyIn.inputAmount.toString(),
+            [currencyOut1.outputCurrency.address, currencyOut2.outputCurrency.address],
+            path1,
+            path2,
+            [currencyOut1.minOutputAmount, currencyOut2.minOutputAmount],
+            [pairOut.minInAmount.token1, pairOut.minInAmount.token2],
+            deadline,
+            stakingContractAddress,
+            stakingPid
           ]
           value = ZERO_HEX
         }
