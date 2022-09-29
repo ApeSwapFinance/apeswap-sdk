@@ -112,8 +112,7 @@ export const WETH = {
     18,
     'WBNB',
     'Wrapped BNB'
-  ),
-  [ChainId.TLOS]: new Token(ChainId.TLOS, '0xd102ce6a4db07d247fcc28f366a623df0938ca9e', 18, 'WTLOS', 'Wrapped TLOS'),
+  )
   // [ChainId.ARBITRUM]: new Token(
   //   ChainId.ARBITRUM,
   //   '0xf8456e5e6A225C2C1D74D8C9a4cB2B1d5dc1153b',

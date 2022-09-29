@@ -27,8 +27,7 @@ export enum ChainId {
   MATIC = 137,
   MATIC_TESTNET = 80001,
   BSC = 56,
-  BSC_TESTNET = 97,
-  TLOS = 40
+  BSC_TESTNET = 97
 }
 
 export enum SmartRouter {
@@ -84,14 +83,6 @@ export const SMART_INIT_CODE_HASH: Record<ChainId, Record<SmartRouter, string>> 
     [SmartRouter.QUICKSWAP]: '',
     [SmartRouter.UNISWAP]: '',
     [SmartRouter.SUSHISWAP]: ''
-  },
-  [ChainId.TLOS]: {
-    [SmartRouter.APE]: '0x7d4b9bb0d5808344c0184aada7d10aae8f6b0cc8ceb5eba8dd084f63b8c32099',
-    [SmartRouter.PANCAKE]: '',
-    [SmartRouter.BISWAP]: '',
-    [SmartRouter.QUICKSWAP]: '',
-    [SmartRouter.UNISWAP]: '',
-    [SmartRouter.SUSHISWAP]: ''
   }
 }
 
@@ -132,14 +123,6 @@ export const SMART_FACTORY_ADDRESS: Record<ChainId, Record<SmartRouter, string>>
   },
   [ChainId.MATIC_TESTNET]: {
     [SmartRouter.APE]: '0xe145a77c21437e3FD32ce2731833114F0B53405b',
-    [SmartRouter.PANCAKE]: '',
-    [SmartRouter.BISWAP]: '',
-    [SmartRouter.QUICKSWAP]: '',
-    [SmartRouter.UNISWAP]: '',
-    [SmartRouter.SUSHISWAP]: ''
-  },
-  [ChainId.TLOS]: {
-    [SmartRouter.APE]: '0x411172Dfcd5f68307656A1ff35520841C2F7fAec',
     [SmartRouter.PANCAKE]: '',
     [SmartRouter.BISWAP]: '',
     [SmartRouter.QUICKSWAP]: '',
@@ -190,14 +173,6 @@ export const SMART_ROUTER_ADDRESS: Record<ChainId, Record<SmartRouter, string>> 
     [SmartRouter.QUICKSWAP]: '',
     [SmartRouter.UNISWAP]: '',
     [SmartRouter.SUSHISWAP]: ''
-  },
-  [ChainId.TLOS]: {
-    [SmartRouter.APE]: '0xb9667Cf9A495A123b0C43B924f6c2244f42817BE',
-    [SmartRouter.PANCAKE]: '',
-    [SmartRouter.BISWAP]: '',
-    [SmartRouter.QUICKSWAP]: '',
-    [SmartRouter.UNISWAP]: '',
-    [SmartRouter.SUSHISWAP]: ''
   }
 }
 
@@ -208,8 +183,7 @@ export const BONUS_ROUTER_ADDRESS: Record<ChainId, string> = {
   [ChainId.BSC]: '0x5471F99bCB8F682f4Fd2b463Fd3609DadD56A929',
   [ChainId.BSC_TESTNET]: '',
   [ChainId.MATIC]: '0xBAe5dc9B19004883d0377419FeF3c2C8832d7d7B',
-  [ChainId.MATIC_TESTNET]: '',
-  [ChainId.TLOS]: ''
+  [ChainId.MATIC_TESTNET]: ''
 }
 
 // Set the zap address for each chain
@@ -219,8 +193,7 @@ export const ZAP_ADDRESS: Record<ChainId, string> = {
   [ChainId.BSC]: '0x7E060D0e0563fbD4CD2b3B845a992Eab31e47f8b',
   [ChainId.BSC_TESTNET]: '0xEe0e3270d2C62AC598E435212a5f87A431e4dDcF',
   [ChainId.MATIC]: '0x7c9eCf17694cB2f91cC24ca5b2fC1ED0cd48EDCb',
-  [ChainId.MATIC_TESTNET]: '',
-  [ChainId.TLOS]: ''
+  [ChainId.MATIC_TESTNET]: ''
 }
 
 // TODO: Cleanup legacy code and swap constants on the FE
@@ -230,8 +203,7 @@ export const INIT_CODE_HASH: { [chainId in ChainId]: string } = {
   [ChainId.MATIC]: '0x511f0f358fe530cda0859ec20becf391718fdf5a329be02f4c95361f3d6a42d8',
   [ChainId.MATIC_TESTNET]: '0x511f0f358fe530cda0859ec20becf391718fdf5a329be02f4c95361f3d6a42d8',
   [ChainId.BSC]: '0xf4ccce374816856d11f00e4069e7cada164065686fbef53c6167a63ec2fd8c5b',
-  [ChainId.BSC_TESTNET]: '0xf4ccce374816856d11f00e4069e7cada164065686fbef53c6167a63ec2fd8c5b',
-  [ChainId.TLOS]: '0x7d4b9bb0d5808344c0184aada7d10aae8f6b0cc8ceb5eba8dd084f63b8c32099'
+  [ChainId.BSC_TESTNET]: '0xf4ccce374816856d11f00e4069e7cada164065686fbef53c6167a63ec2fd8c5b'
 }
 
 export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
@@ -239,8 +211,7 @@ export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MATIC]: '0xCf083Be4164828f00cAE704EC15a36D711491284',
   [ChainId.MATIC_TESTNET]: '0xe145a77c21437e3FD32ce2731833114F0B53405b',
   [ChainId.BSC]: '0x0841BD0B734E4F5853f0dD8d7Ea041c241fb0Da6',
-  [ChainId.BSC_TESTNET]: '0x152349604d49c2af10adee94b918b051104a143e',
-  [ChainId.TLOS]: '0x411172Dfcd5f68307656A1ff35520841C2F7fAec'
+  [ChainId.BSC_TESTNET]: '0x152349604d49c2af10adee94b918b051104a143e'
 }
 
 export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
@@ -248,8 +219,7 @@ export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MATIC]: '0xC0788A3aD43d79aa53B09c2EaCc313A787d1d607',
   [ChainId.MATIC_TESTNET]: '0x8fCf4B197A9Df7ab4ed511932cA6c8E1a8fe2F1d',
   [ChainId.BSC]: '0xcf0febd3f17cef5b47b0cd257acf6025c5bff3b7',
-  [ChainId.BSC_TESTNET]: '0x3380ae82e39e42ca34ebed69af67faa0683bb5c1',
-  [ChainId.TLOS]: '0xb9667Cf9A495A123b0C43B924f6c2244f42817BE'
+  [ChainId.BSC_TESTNET]: '0x3380ae82e39e42ca34ebed69af67faa0683bb5c1'
 }
 
 export const MINIMUM_LIQUIDITY = JSBI.BigInt(1000)

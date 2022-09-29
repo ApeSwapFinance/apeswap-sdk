@@ -28,6 +28,9 @@ export interface ZapOptions {
   poolAddress?: string
 
   billAddress?: string
+
+  // This is the max price for a bill to be zapped
+  maxPrice?: string
 }
 
 export interface ZapOptionsDeadline extends Omit<ZapOptions, 'ttl'> {
@@ -95,7 +98,7 @@ export abstract class ZapV1 {
     invariant(zap, 'null Zap')
 
     const { chainId, currencyIn, currencyOut1, currencyOut2, pairOut } = zap
-    const { zapType } = options
+    const { zapType, maxPrice } = options
 
     invariant(chainId !== undefined, 'CHAIN_ID')
 
@@ -165,6 +168,36 @@ export abstract class ZapV1 {
           value = ZERO_HEX
         }
         break
+      case ZapType.ZAP_LP_POOL:
+        invariant(poolAddress, 'Missing Pool Address')
+        if (etherIn) {
+          methodName = 'zapLPPoolNative'
+          args = [
+            [currencyOut1.outputCurrency.address, currencyOut2.outputCurrency.address],
+            path1,
+            path2,
+            [currencyOut1.minOutputAmount, currencyOut2.minOutputAmount],
+            [pairOut.minInAmount.token1, pairOut.minInAmount.token2],
+            deadline,
+            poolAddress
+          ]
+          value = currencyIn.inputAmount.toString()
+        } else {
+          methodName = 'zapLPPool'
+          args = [
+            currencyInToken.address,
+            currencyIn.inputAmount.toString(),
+            [currencyOut1.outputCurrency.address, currencyOut2.outputCurrency.address],
+            path1,
+            path2,
+            [currencyOut1.minOutputAmount, currencyOut2.minOutputAmount],
+            [pairOut.minInAmount.token1, pairOut.minInAmount.token2],
+            deadline,
+            poolAddress
+          ]
+          value = ZERO_HEX
+        }
+        break
       case ZapType.ZAP_T_BILL:
         invariant(billAddress, 'Missing Bill Address')
         if (etherIn) {
@@ -177,7 +210,7 @@ export abstract class ZapV1 {
             [pairOut.minInAmount.token1, pairOut.minInAmount.token2],
             deadline,
             billAddress,
-            '100000000000000000000'
+            maxPrice || '0'
           ]
           value = currencyIn.inputAmount.toString()
         } else {
@@ -192,7 +225,7 @@ export abstract class ZapV1 {
             [pairOut.minInAmount.token1, pairOut.minInAmount.token2],
             deadline,
             billAddress,
-            '1000000000000000000000'
+            maxPrice || '0'
           ]
           value = ZERO_HEX
         }
