@@ -13,7 +13,8 @@ export enum ZapType {
   ZAP_LP_MIGRATOR,
   ZAP_LP_POOL,
   ZAP_SINGLE_ASSET_POOL,
-  ZAP_T_BILL
+  ZAP_T_BILL,
+  ZAP_MINI_APE
 }
 
 export enum Rounding {
