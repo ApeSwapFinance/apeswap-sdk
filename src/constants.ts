@@ -13,7 +13,8 @@ export enum ZapType {
   ZAP_LP_MIGRATOR,
   ZAP_LP_POOL,
   ZAP_SINGLE_ASSET_POOL,
-  ZAP_T_BILL
+  ZAP_T_BILL,
+  ZAP_MINI_APE
 }
 
 export enum Rounding {
@@ -38,6 +39,10 @@ export enum SmartRouter {
   UNISWAP = 'UNISWAP',
   SUSHISWAP = 'SUSHISWAP'
 }
+
+// Each constant will need each chain and SmartRouter
+
+// Set the initial hash. Can find from factory
 
 export const SMART_INIT_CODE_HASH: Record<ChainId, Record<SmartRouter, string>> = {
   [ChainId.MAINNET]: {
@@ -82,6 +87,8 @@ export const SMART_INIT_CODE_HASH: Record<ChainId, Record<SmartRouter, string>> 
   }
 }
 
+// Set the factory for each chain
+
 export const SMART_FACTORY_ADDRESS: Record<ChainId, Record<SmartRouter, string>> = {
   [ChainId.MAINNET]: {
     [SmartRouter.APE]: '0xBAe5dc9B19004883d0377419FeF3c2C8832d7d7B',
@@ -124,6 +131,8 @@ export const SMART_FACTORY_ADDRESS: Record<ChainId, Record<SmartRouter, string>>
     [SmartRouter.SUSHISWAP]: ''
   }
 }
+
+// Set the router for each chain
 
 export const SMART_ROUTER_ADDRESS: Record<ChainId, Record<SmartRouter, string>> = {
   [ChainId.MAINNET]: {
@@ -168,6 +177,8 @@ export const SMART_ROUTER_ADDRESS: Record<ChainId, Record<SmartRouter, string>> 
   }
 }
 
+// Set the bonus router for each chain
+
 export const BONUS_ROUTER_ADDRESS: Record<ChainId, string> = {
   [ChainId.MAINNET]: '0xb4aD8df313109caaF8Fdcde9094e9d1DE41252bc',
   [ChainId.BSC]: '0x5471F99bCB8F682f4Fd2b463Fd3609DadD56A929',
@@ -175,6 +186,8 @@ export const BONUS_ROUTER_ADDRESS: Record<ChainId, string> = {
   [ChainId.MATIC]: '0xBAe5dc9B19004883d0377419FeF3c2C8832d7d7B',
   [ChainId.MATIC_TESTNET]: ''
 }
+
+// Set the zap address for each chain
 
 export const ZAP_ADDRESS: Record<ChainId, string> = {
   [ChainId.MAINNET]: '',
@@ -208,46 +221,6 @@ export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MATIC_TESTNET]: '0x8fCf4B197A9Df7ab4ed511932cA6c8E1a8fe2F1d',
   [ChainId.BSC]: '0xcf0febd3f17cef5b47b0cd257acf6025c5bff3b7',
   [ChainId.BSC_TESTNET]: '0x3380ae82e39e42ca34ebed69af67faa0683bb5c1'
-}
-
-export const SUSHI_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.MAINNET]: '0x6B3595068778DD592e39A122f4f5a5cF09C90fE2',
-  [ChainId.MATIC]: '',
-  [ChainId.MATIC_TESTNET]: '',
-  [ChainId.BSC]: '',
-  [ChainId.BSC_TESTNET]: ''
-}
-
-export const MASTERCHEF_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.MAINNET]: '0xc2EdaD668740f1aA35E4D8f227fB8E17dcA888Cd',
-  [ChainId.MATIC]: '',
-  [ChainId.MATIC_TESTNET]: '',
-  [ChainId.BSC]: '',
-  [ChainId.BSC_TESTNET]: ''
-}
-
-export const BAR_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.MAINNET]: '0x8798249c2E607446EfB7Ad49eC89dD1865Ff4272',
-  [ChainId.MATIC]: '',
-  [ChainId.MATIC_TESTNET]: '',
-  [ChainId.BSC]: '',
-  [ChainId.BSC_TESTNET]: ''
-}
-
-export const MAKER_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.MAINNET]: '0xE11fc0B43ab98Eb91e9836129d1ee7c3Bc95df50',
-  [ChainId.MATIC]: '',
-  [ChainId.MATIC_TESTNET]: '',
-  [ChainId.BSC]: '',
-  [ChainId.BSC_TESTNET]: ''
-}
-
-export const TIMELOCK_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.MAINNET]: '0x9a8541Ddf3a932a9A922B607e9CF7301f1d47bD1',
-  [ChainId.MATIC]: '',
-  [ChainId.MATIC_TESTNET]: '',
-  [ChainId.BSC]: '',
-  [ChainId.BSC_TESTNET]: ''
 }
 
 export const MINIMUM_LIQUIDITY = JSBI.BigInt(1000)

@@ -17,9 +17,11 @@ export class Currency {
 
   public static readonly BNB: Currency = new Currency(18, 'BNB', 'Binance Coin')
 
-  public static readonly FTM: Currency = new Currency(18, 'FTM', 'Fantom')
-
   public static readonly MATIC: Currency = new Currency(18, 'MATIC', 'Matic')
+
+  public static readonly TLOS: Currency = new Currency(18, 'TLOS', 'Telos Coin')
+
+  public static readonly FTM: Currency = new Currency(18, 'FTM', 'Fantom')
 
   public static readonly XDAI: Currency = new Currency(18, 'XDAI', 'xDai')
 
@@ -33,12 +35,12 @@ export class Currency {
 
   public static readonly OKT: Currency = new Currency(18, 'OKT', 'OKExChain')
 
-  public static readonly NATIVE = {
+  public static readonly NATIVE: Record<ChainId, Currency> = {
     [ChainId.MAINNET]: Currency.ETHER,
     [ChainId.MATIC]: Currency.MATIC,
     [ChainId.MATIC_TESTNET]: Currency.MATIC,
     [ChainId.BSC]: Currency.BNB,
-    [ChainId.BSC_TESTNET]: Currency.BNB,
+    [ChainId.BSC_TESTNET]: Currency.BNB
   }
 
   /**
@@ -106,28 +108,5 @@ export class Currency {
 }
 
 const ETHER = Currency.ETHER
-
-// const NATIVE_CURRENCY = {
-//   [ChainId.MAINNET]: Currency.ETHER,
-//   [ChainId.ROPSTEN]: Currency.ETHER,
-//   [ChainId.RINKEBY]: Currency.ETHER,
-//   [ChainId.GÖRLI]: Currency.ETHER,
-//   [ChainId.KOVAN]: Currency.ETHER,
-//   [ChainId.FANTOM]: Currency.FTM,
-//   [ChainId.FANTOM_TESTNET]: Currency.FTM,
-//   [ChainId.MATIC]: Currency.MATIC,
-//   [ChainId.MATIC_TESTNET]: Currency.MATIC,
-//   [ChainId.XDAI]: Currency.XDAI,
-//   [ChainId.BSC]: Currency.BNB,
-//   [ChainId.BSC_TESTNET]: Currency.BNB,
-//   [ChainId.ARBITRUM]: Currency.ETHER,
-//   [ChainId.MOONBASE]: Currency.GLMR,
-//   [ChainId.AVALANCHE]: Currency.AVAX,
-//   [ChainId.FUJI]: Currency.AVAX,
-//   [ChainId.HECO]: Currency.HT,
-//   [ChainId.HECO_TESTNET]: Currency.HT,
-//   [ChainId.HARMONY]: Currency.ONE,
-//   [ChainId.HARMONY_TESTNET]: Currency.ONE
-// }
 
 export { ETHER }
