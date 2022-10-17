@@ -136,7 +136,7 @@ export const BONUS_ROUTER_ADDRESS: Record<ChainId, string> = {
   [ChainId.BSC_TESTNET]: '',
   [ChainId.MATIC]: '0xBAe5dc9B19004883d0377419FeF3c2C8832d7d7B',
   [ChainId.MATIC_TESTNET]: '',
-  [ChainId.TLOS]: ''
+  [ChainId.TLOS]: '0x1669Bb96A9a7eD0eB23B47AD61360d648A5Dade7'
 }
 
 // Set the zap address for each chain
