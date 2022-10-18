@@ -77,7 +77,8 @@ export abstract class ZapMigratorV1 {
     invariant(zap, 'null Zap')
 
     const { zapLp, amount, amountAMinRemove, amountBMinRemove, amountAMinAdd, amountBMinAdd, chainId } = zap
-    const routerAddress = SMART_ROUTER_ADDRESS[chainId][zapLp.router]
+    // If the smart router doesn't exist the call will fail
+    const routerAddress = SMART_ROUTER_ADDRESS[chainId][zapLp.router] || ''
 
     const deadline =
       'ttl' in options

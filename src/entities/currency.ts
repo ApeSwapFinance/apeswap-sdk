@@ -40,7 +40,8 @@ export class Currency {
     [ChainId.MATIC]: Currency.MATIC,
     [ChainId.MATIC_TESTNET]: Currency.MATIC,
     [ChainId.BSC]: Currency.BNB,
-    [ChainId.BSC_TESTNET]: Currency.BNB
+    [ChainId.BSC_TESTNET]: Currency.BNB,
+    [ChainId.TLOS]: Currency.TLOS
   }
 
   /**
