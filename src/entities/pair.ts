@@ -41,9 +41,9 @@ export class Pair {
           [tokens[0].address]: {
             ...PAIR_ADDRESS_CACHE?.[smartRouter]?.[tokens[0].address],
             [tokens[1].address]: getCreate2Address(
-              SMART_FACTORY_ADDRESS[tokenA.chainId][smartRouter],
+              SMART_FACTORY_ADDRESS[tokenA.chainId][smartRouter] || '',
               keccak256(['bytes'], [pack(['address', 'address'], [tokens[0].address, tokens[1].address])]),
-              SMART_INIT_CODE_HASH[tokenA.chainId][smartRouter]
+              SMART_INIT_CODE_HASH[tokenA.chainId][smartRouter] || ''
             )
           }
         }
