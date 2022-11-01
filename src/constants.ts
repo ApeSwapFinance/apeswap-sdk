@@ -145,7 +145,7 @@ export const ZAP_ADDRESS: Record<ChainId, string> = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '0x7E060D0e0563fbD4CD2b3B845a992Eab31e47f8b',
   [ChainId.BSC_TESTNET]: '0xEe0e3270d2C62AC598E435212a5f87A431e4dDcF',
-  [ChainId.MATIC]: '0x7c9eCf17694cB2f91cC24ca5b2fC1ED0cd48EDCb',
+  [ChainId.MATIC]: '0x236290f7da54465BF7A26f279d2B3553e5402780',
   [ChainId.MATIC_TESTNET]: '',
   [ChainId.TLOS]: '0x10614e4395AAc006ca0Ef4970d1412e8e921d911'
 }
@@ -177,6 +177,10 @@ export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.BSC]: '0xcf0febd3f17cef5b47b0cd257acf6025c5bff3b7',
   [ChainId.BSC_TESTNET]: '0x3380ae82e39e42ca34ebed69af67faa0683bb5c1',
   [ChainId.TLOS]: '0xb9667Cf9A495A123b0C43B924f6c2244f42817BE'
+}
+
+export const MINI_APE_ADDRESS: Partial<Record<ChainId, string>> = {
+  [ChainId.MATIC]: '0x54aff400858Dcac39797a81894D9920f16972D1D'
 }
 
 export const MINIMUM_LIQUIDITY = JSBI.BigInt(1000)

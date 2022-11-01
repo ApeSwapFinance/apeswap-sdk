@@ -1,4 +1,4 @@
-import { ChainId, ZapType } from './constants'
+import { ChainId, MINI_APE_ADDRESS, ZapType } from './constants'
 import invariant from 'tiny-invariant'
 import { validateAndParseAddress } from './utils'
 import { Currency, CurrencyAmount, ETHER, Pair, Percent, Token, TokenAmount, WETH } from './entities'
@@ -233,7 +233,6 @@ export abstract class ZapV1 {
         }
         break
       case ZapType.ZAP_MINI_APE:
-        invariant(stakingContractAddress, 'Missing MiniApe Address')
         invariant(stakingPid, 'Missing contract PID')
         if (etherIn) {
           methodName = 'zapMiniApeV2Native'
@@ -244,7 +243,7 @@ export abstract class ZapV1 {
             [currencyOut1.minOutputAmount, currencyOut2.minOutputAmount],
             [pairOut.minInAmount.token1, pairOut.minInAmount.token2],
             deadline,
-            stakingContractAddress,
+            MINI_APE_ADDRESS[ChainId.MATIC] || '',
             stakingPid
           ]
           value = currencyIn.inputAmount.toString()
@@ -259,7 +258,7 @@ export abstract class ZapV1 {
             [currencyOut1.minOutputAmount, currencyOut2.minOutputAmount],
             [pairOut.minInAmount.token1, pairOut.minInAmount.token2],
             deadline,
-            stakingContractAddress,
+            MINI_APE_ADDRESS[ChainId.MATIC] || '',
             stakingPid
           ]
           value = ZERO_HEX
