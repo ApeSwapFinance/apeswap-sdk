@@ -29,7 +29,8 @@ export enum ChainId {
   MATIC_TESTNET = 80001,
   BSC = 56,
   BSC_TESTNET = 97,
-  TLOS = 40
+  TLOS = 40,
+  ARBITRUM = 42161
 }
 
 export enum SmartRouter {
@@ -68,6 +69,9 @@ export const SMART_INIT_CODE_HASH: Record<ChainId, Partial<Record<SmartRouter, s
   },
   [ChainId.TLOS]: {
     [SmartRouter.APE]: '0x7d4b9bb0d5808344c0184aada7d10aae8f6b0cc8ceb5eba8dd084f63b8c32099'
+  },
+  [ChainId.ARBITRUM]: {
+    [SmartRouter.APE]: '0x7d4b9bb0d5808344c0184aada7d10aae8f6b0cc8ceb5eba8dd084f63b8c32099'
   }
 }
 
@@ -96,6 +100,9 @@ export const SMART_FACTORY_ADDRESS: Record<ChainId, Partial<Record<SmartRouter, 
   },
   [ChainId.TLOS]: {
     [SmartRouter.APE]: '0x411172Dfcd5f68307656A1ff35520841C2F7fAec'
+  },
+  [ChainId.ARBITRUM]: {
+    [SmartRouter.APE]: '0x789c70C0599FAfeeE2fE8aF86b1320f9e406A5fB'
   }
 }
 
@@ -125,6 +132,9 @@ export const SMART_ROUTER_ADDRESS: Record<ChainId, Partial<Record<SmartRouter, s
   },
   [ChainId.TLOS]: {
     [SmartRouter.APE]: '0xb9667Cf9A495A123b0C43B924f6c2244f42817BE'
+  },
+  [ChainId.ARBITRUM]: {
+    [SmartRouter.APE]: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506'
   }
 }
 
@@ -136,7 +146,8 @@ export const BONUS_ROUTER_ADDRESS: Record<ChainId, string> = {
   [ChainId.BSC_TESTNET]: '',
   [ChainId.MATIC]: '0xBAe5dc9B19004883d0377419FeF3c2C8832d7d7B',
   [ChainId.MATIC_TESTNET]: '',
-  [ChainId.TLOS]: '0x1669Bb96A9a7eD0eB23B47AD61360d648A5Dade7'
+  [ChainId.TLOS]: '0x1669Bb96A9a7eD0eB23B47AD61360d648A5Dade7',
+  [ChainId.ARBITRUM]: '',
 }
 
 // Set the zap address for each chain
@@ -147,7 +158,8 @@ export const ZAP_ADDRESS: Record<ChainId, string> = {
   [ChainId.BSC_TESTNET]: '0xEe0e3270d2C62AC598E435212a5f87A431e4dDcF',
   [ChainId.MATIC]: '0x236290f7da54465BF7A26f279d2B3553e5402780',
   [ChainId.MATIC_TESTNET]: '',
-  [ChainId.TLOS]: '0x10614e4395AAc006ca0Ef4970d1412e8e921d911'
+  [ChainId.TLOS]: '0x10614e4395AAc006ca0Ef4970d1412e8e921d911',
+  [ChainId.ARBITRUM]: '',
 }
 
 // TODO: Cleanup legacy code and swap constants on the FE
@@ -158,7 +170,8 @@ export const INIT_CODE_HASH: { [chainId in ChainId]: string } = {
   [ChainId.MATIC_TESTNET]: '0x511f0f358fe530cda0859ec20becf391718fdf5a329be02f4c95361f3d6a42d8',
   [ChainId.BSC]: '0xf4ccce374816856d11f00e4069e7cada164065686fbef53c6167a63ec2fd8c5b',
   [ChainId.BSC_TESTNET]: '0xf4ccce374816856d11f00e4069e7cada164065686fbef53c6167a63ec2fd8c5b',
-  [ChainId.TLOS]: '0x7d4b9bb0d5808344c0184aada7d10aae8f6b0cc8ceb5eba8dd084f63b8c32099'
+  [ChainId.TLOS]: '0x7d4b9bb0d5808344c0184aada7d10aae8f6b0cc8ceb5eba8dd084f63b8c32099',
+  [ChainId.ARBITRUM]: '0x7d4b9bb0d5808344c0184aada7d10aae8f6b0cc8ceb5eba8dd084f63b8c32099'
 }
 
 export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
@@ -167,7 +180,8 @@ export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MATIC_TESTNET]: '0xe145a77c21437e3FD32ce2731833114F0B53405b',
   [ChainId.BSC]: '0x0841BD0B734E4F5853f0dD8d7Ea041c241fb0Da6',
   [ChainId.BSC_TESTNET]: '0x152349604d49c2af10adee94b918b051104a143e',
-  [ChainId.TLOS]: '0x411172Dfcd5f68307656A1ff35520841C2F7fAec'
+  [ChainId.TLOS]: '0x411172Dfcd5f68307656A1ff35520841C2F7fAec',
+  [ChainId.ARBITRUM]: '0x789c70C0599FAfeeE2fE8aF86b1320f9e406A5fB'
 }
 
 export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
@@ -176,7 +190,8 @@ export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MATIC_TESTNET]: '0x8fCf4B197A9Df7ab4ed511932cA6c8E1a8fe2F1d',
   [ChainId.BSC]: '0xcf0febd3f17cef5b47b0cd257acf6025c5bff3b7',
   [ChainId.BSC_TESTNET]: '0x3380ae82e39e42ca34ebed69af67faa0683bb5c1',
-  [ChainId.TLOS]: '0xb9667Cf9A495A123b0C43B924f6c2244f42817BE'
+  [ChainId.TLOS]: '0xb9667Cf9A495A123b0C43B924f6c2244f42817BE',
+  [ChainId.ARBITRUM]: '0x7aa642d99BB141bDd5a5Ef31a0e81473fa6701e5'
 }
 
 export const MINI_APE_ADDRESS: Partial<Record<ChainId, string>> = {
