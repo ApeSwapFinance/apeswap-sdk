@@ -134,7 +134,8 @@ export const SMART_ROUTER_ADDRESS: Record<ChainId, Partial<Record<SmartRouter, s
     [SmartRouter.APE]: '0xb9667Cf9A495A123b0C43B924f6c2244f42817BE'
   },
   [ChainId.ARBITRUM]: {
-    [SmartRouter.APE]: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506'
+    [SmartRouter.APE]: '0x7aa642d99BB141bDd5a5Ef31a0e81473fa6701e5',
+    [SmartRouter.SUSHISWAP]: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506'
   }
 }
 
