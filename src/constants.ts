@@ -134,7 +134,7 @@ export const SMART_ROUTER_ADDRESS: Record<ChainId, Partial<Record<SmartRouter, s
     [SmartRouter.APE]: '0xb9667Cf9A495A123b0C43B924f6c2244f42817BE'
   },
   [ChainId.ARBITRUM]: {
-    [SmartRouter.APE]: '0xA075A6c6404678401F17C39E6938D83d00D82b6c',
+    [SmartRouter.APE]: '0x7d13268144adcdbEBDf94F654085CC15502849Ff',
     [SmartRouter.SUSHISWAP]: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506'
   }
 }
@@ -192,7 +192,7 @@ export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.BSC]: '0xcf0febd3f17cef5b47b0cd257acf6025c5bff3b7',
   [ChainId.BSC_TESTNET]: '0x3380ae82e39e42ca34ebed69af67faa0683bb5c1',
   [ChainId.TLOS]: '0xb9667Cf9A495A123b0C43B924f6c2244f42817BE',
-  [ChainId.ARBITRUM]: '0xA075A6c6404678401F17C39E6938D83d00D82b6c'
+  [ChainId.ARBITRUM]: '0x7d13268144adcdbEBDf94F654085CC15502849Ff'
 }
 
 export const MINI_APE_ADDRESS: Partial<Record<ChainId, string>> = {
