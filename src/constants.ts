@@ -71,7 +71,8 @@ export const SMART_INIT_CODE_HASH: Record<ChainId, Partial<Record<SmartRouter, s
     [SmartRouter.APE]: '0x7d4b9bb0d5808344c0184aada7d10aae8f6b0cc8ceb5eba8dd084f63b8c32099'
   },
   [ChainId.ARBITRUM]: {
-    [SmartRouter.APE]: '0xae7373e804a043c4c08107a81def627eeb3792e211fb4711fcfe32f0e4c45fd5'
+    [SmartRouter.APE]: '0xae7373e804a043c4c08107a81def627eeb3792e211fb4711fcfe32f0e4c45fd5',
+    [SmartRouter.SUSHISWAP]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
   }
 }
 
@@ -102,7 +103,8 @@ export const SMART_FACTORY_ADDRESS: Record<ChainId, Partial<Record<SmartRouter, 
     [SmartRouter.APE]: '0x411172Dfcd5f68307656A1ff35520841C2F7fAec'
   },
   [ChainId.ARBITRUM]: {
-    [SmartRouter.APE]: '0xCf083Be4164828f00cAE704EC15a36D711491284'
+    [SmartRouter.APE]: '0xCf083Be4164828f00cAE704EC15a36D711491284',
+    [SmartRouter.SUSHISWAP]: '0xc35dadb65012ec5796536bd9864ed8773abc74c4'
   }
 }
 
@@ -135,7 +137,7 @@ export const SMART_ROUTER_ADDRESS: Record<ChainId, Partial<Record<SmartRouter, s
   },
   [ChainId.ARBITRUM]: {
     [SmartRouter.APE]: '0x7d13268144adcdbEBDf94F654085CC15502849Ff',
-    [SmartRouter.SUSHISWAP]: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506'
+    [SmartRouter.SUSHISWAP]: '0x1b02da8cb0d097eb8d57a175b88c7d8b47997506'
   }
 }
 
