@@ -30,7 +30,9 @@ export enum ChainId {
   BSC = 56,
   BSC_TESTNET = 97,
   TLOS = 40,
-  ARBITRUM = 42161
+  ARBITRUM = 42161,
+  INEVM_TESTNET = 2424,
+  INEVM = 2525,
 }
 
 export enum SmartRouter {
@@ -46,7 +48,7 @@ export enum SmartRouter {
 
 // Set the initial hash. Can find from factory
 
-export const SMART_INIT_CODE_HASH: Record<ChainId, Partial<Record<SmartRouter, string>>> = {
+export const SMART_INIT_CODE_HASH: Partial<Record<ChainId, Partial<Record<SmartRouter, string>>>> = {
   [ChainId.MAINNET]: {
     [SmartRouter.APE]: '0xe2200989b6f9506f3beca7e9c844741b3ad1a88ad978b6b0973e96d3ca4707aa',
     [SmartRouter.UNISWAP]: '0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f',
@@ -78,7 +80,7 @@ export const SMART_INIT_CODE_HASH: Record<ChainId, Partial<Record<SmartRouter, s
 
 // Set the factory for each chain
 
-export const SMART_FACTORY_ADDRESS: Record<ChainId, Partial<Record<SmartRouter, string>>> = {
+export const SMART_FACTORY_ADDRESS: Partial<Record<ChainId, Partial<Record<SmartRouter, string>>>> = {
   [ChainId.MAINNET]: {
     [SmartRouter.APE]: '0xBAe5dc9B19004883d0377419FeF3c2C8832d7d7B',
     [SmartRouter.UNISWAP]: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
@@ -110,7 +112,7 @@ export const SMART_FACTORY_ADDRESS: Record<ChainId, Partial<Record<SmartRouter, 
 
 // Set the router for each chain
 
-export const SMART_ROUTER_ADDRESS: Record<ChainId, Partial<Record<SmartRouter, string>>> = {
+export const SMART_ROUTER_ADDRESS: Partial<Record<ChainId, Partial<Record<SmartRouter, string>>>> = {
   [ChainId.MAINNET]: {
     [SmartRouter.APE]: '0x5f509a3C3F16dF2Fba7bF84dEE1eFbce6BB85587',
     [SmartRouter.UNISWAP]: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
@@ -143,7 +145,7 @@ export const SMART_ROUTER_ADDRESS: Record<ChainId, Partial<Record<SmartRouter, s
 
 // Set the bonus router for each chain
 
-export const BONUS_ROUTER_ADDRESS: Record<ChainId, string> = {
+export const BONUS_ROUTER_ADDRESS: Partial<Record<ChainId, string>> = {
   [ChainId.MAINNET]: '0xb4aD8df313109caaF8Fdcde9094e9d1DE41252bc',
   [ChainId.BSC]: '0x5471F99bCB8F682f4Fd2b463Fd3609DadD56A929',
   [ChainId.BSC_TESTNET]: '',
@@ -155,7 +157,7 @@ export const BONUS_ROUTER_ADDRESS: Record<ChainId, string> = {
 
 // Set the zap address for each chain
 
-export const ZAP_ADDRESS: Record<ChainId, string> = {
+export const ZAP_ADDRESS: Partial<Record<ChainId, string>> = {
   [ChainId.MAINNET]: '',
   [ChainId.BSC]: '0x7E060D0e0563fbD4CD2b3B845a992Eab31e47f8b',
   [ChainId.BSC_TESTNET]: '0xEe0e3270d2C62AC598E435212a5f87A431e4dDcF',
@@ -167,7 +169,7 @@ export const ZAP_ADDRESS: Record<ChainId, string> = {
 
 // TODO: Cleanup legacy code and swap constants on the FE
 
-export const INIT_CODE_HASH: { [chainId in ChainId]: string } = {
+export const INIT_CODE_HASH: Partial<{ [chainId in ChainId]: string }> = {
   [ChainId.MAINNET]: '0xe2200989b6f9506f3beca7e9c844741b3ad1a88ad978b6b0973e96d3ca4707aa',
   [ChainId.MATIC]: '0x511f0f358fe530cda0859ec20becf391718fdf5a329be02f4c95361f3d6a42d8',
   [ChainId.MATIC_TESTNET]: '0x511f0f358fe530cda0859ec20becf391718fdf5a329be02f4c95361f3d6a42d8',
@@ -177,7 +179,7 @@ export const INIT_CODE_HASH: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '0xae7373e804a043c4c08107a81def627eeb3792e211fb4711fcfe32f0e4c45fd5'
 }
 
-export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
+export const FACTORY_ADDRESS: Partial<{ [chainId in ChainId]: string }> = {
   [ChainId.MAINNET]: '0xBAe5dc9B19004883d0377419FeF3c2C8832d7d7B',
   [ChainId.MATIC]: '0xCf083Be4164828f00cAE704EC15a36D711491284',
   [ChainId.MATIC_TESTNET]: '0xe145a77c21437e3FD32ce2731833114F0B53405b',
@@ -187,7 +189,7 @@ export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '0xCf083Be4164828f00cAE704EC15a36D711491284'
 }
 
-export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
+export const ROUTER_ADDRESS: Partial<{ [chainId in ChainId]: string }> = {
   [ChainId.MAINNET]: '0x5f509a3C3F16dF2Fba7bF84dEE1eFbce6BB85587',
   [ChainId.MATIC]: '0xC0788A3aD43d79aa53B09c2EaCc313A787d1d607',
   [ChainId.MATIC_TESTNET]: '0x8fCf4B197A9Df7ab4ed511932cA6c8E1a8fe2F1d',

@@ -58,7 +58,7 @@ export function currencyEquals(currencyA: Currency, currencyB: Currency): boolea
 
 // In reality this is a map of the wrapped version of the native token for a given network.
 // TODO: Rename to WNATIVE for sanity
-export const WETH = {
+export const WETH: Partial<Record<ChainId, Token>> = {
   [ChainId.MAINNET]: new Token(
     ChainId.MAINNET,
     '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',

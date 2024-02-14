@@ -35,7 +35,7 @@ export class Currency {
 
   public static readonly OKT: Currency = new Currency(18, 'OKT', 'OKExChain')
 
-  public static readonly NATIVE: Record<ChainId, Currency> = {
+  public static readonly NATIVE: Partial<Record<ChainId, Currency>> = {
     [ChainId.MAINNET]: Currency.ETHER,
     [ChainId.MATIC]: Currency.MATIC,
     [ChainId.MATIC_TESTNET]: Currency.MATIC,
@@ -72,12 +72,12 @@ export class Currency {
 
   public static getNativeCurrencySymbol(chainId?: ChainId) {
     const nativeCurrency = this.getNativeCurrency(chainId)
-    return nativeCurrency.symbol
+    return nativeCurrency?.symbol
   }
 
   public static getNativeCurrencyName(chainId?: ChainId) {
     const nativeCurrency = this.getNativeCurrency(chainId)
-    return nativeCurrency.name
+    return nativeCurrency?.name
   }
 
   public getSymbol(chainId?: ChainId) {
