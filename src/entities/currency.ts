@@ -42,7 +42,7 @@ export class Currency {
     [ChainId.BSC]: Currency.BNB,
     [ChainId.BSC_TESTNET]: Currency.BNB,
     [ChainId.TLOS]: Currency.TLOS,
-    [ChainId.ARBITRUM]: Currency.ETHER,
+    [ChainId.ARBITRUM]: Currency.ETHER
   }
 
   /**

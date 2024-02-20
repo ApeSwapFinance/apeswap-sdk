@@ -78,7 +78,10 @@ export abstract class BonusRouter {
    * @param trade to produce call parameters for
    * @param options options for the call parameters
    */
-  public static swapCallParameters(trade: Trade, options: BonusTradeOptions | SmartTradeOptionsDeadline): SmartSwapParameters {
+  public static swapCallParameters(
+    trade: Trade,
+    options: BonusTradeOptions | SmartTradeOptionsDeadline
+  ): SmartSwapParameters {
     const etherIn = trade.inputAmount.currency === ETHER
     const etherOut = trade.outputAmount.currency === ETHER
     // the router does not support both ether in and out

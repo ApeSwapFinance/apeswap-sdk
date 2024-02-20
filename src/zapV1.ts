@@ -108,7 +108,7 @@ export abstract class ZapV1 {
 
     const path1 = currencyOut1.path.map(token => token.address)
     const path2 = currencyOut2.path.map(token => token.address)
-    const currencyInToken: Token = (etherIn ? (WETH[chainId]) : (currencyIn?.currency)) as Token
+    const currencyInToken: Token = (etherIn ? WETH[chainId] : currencyIn?.currency) as Token
     const to: string = validateAndParseAddress(options.recipient)
     const stakingContractAddress = options?.stakingContractAddress
     const stakingPid = options?.stakingPid
