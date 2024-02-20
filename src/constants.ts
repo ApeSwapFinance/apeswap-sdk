@@ -33,7 +33,7 @@ export enum ChainId {
   TLOS = 40,
   ARBITRUM = 42161,
   INEVM = 2525,
-  INEVM_TESTNET = 2424,
+  INEVM_TESTNET = 2424
 }
 
 export enum SmartRouter {
@@ -75,7 +75,7 @@ export const SMART_INIT_CODE_HASH: Partial<Record<ChainId, Partial<Record<SmartR
   },
   [ChainId.ARBITRUM]: {
     [SmartRouter.APE]: '0xae7373e804a043c4c08107a81def627eeb3792e211fb4711fcfe32f0e4c45fd5',
-    [SmartRouter.SUSHISWAP]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
+    [SmartRouter.SUSHISWAP]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303'
   }
 }
 
@@ -153,7 +153,7 @@ export const BONUS_ROUTER_ADDRESS: Partial<Record<ChainId, string>> = {
   [ChainId.MATIC]: '0xBAe5dc9B19004883d0377419FeF3c2C8832d7d7B',
   [ChainId.MATIC_TESTNET]: '',
   [ChainId.TLOS]: '0x1669Bb96A9a7eD0eB23B47AD61360d648A5Dade7',
-  [ChainId.ARBITRUM]: '',
+  [ChainId.ARBITRUM]: ''
 }
 
 // Set the zap address for each chain
@@ -165,7 +165,7 @@ export const ZAP_ADDRESS: Partial<Record<ChainId, string>> = {
   [ChainId.MATIC]: '0x236290f7da54465BF7A26f279d2B3553e5402780',
   [ChainId.MATIC_TESTNET]: '',
   [ChainId.TLOS]: '0x10614e4395AAc006ca0Ef4970d1412e8e921d911',
-  [ChainId.ARBITRUM]: '0xc06e6E717E217D9148c30D1B01E1b04CB6E6bB8e',
+  [ChainId.ARBITRUM]: '0xc06e6E717E217D9148c30D1B01E1b04CB6E6bB8e'
 }
 
 // TODO: Cleanup legacy code and swap constants on the FE
