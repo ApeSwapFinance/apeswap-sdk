@@ -25,15 +25,15 @@ export enum Rounding {
 
 export enum ChainId {
   MAINNET = 1,
-  SEPOLIA = 11155111,
   MATIC = 137,
   MATIC_TESTNET = 80001,
   BSC = 56,
   BSC_TESTNET = 97,
   TLOS = 40,
   ARBITRUM = 42161,
+  INEVM_TESTNET = 2424,
   INEVM = 2525,
-  INEVM_TESTNET = 2424
+  SEPOLIA = 11155111
 }
 
 export enum SmartRouter {
