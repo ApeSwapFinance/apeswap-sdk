@@ -33,7 +33,8 @@ export enum ChainId {
   ARBITRUM = 42161,
   INEVM_TESTNET = 2424,
   INEVM = 2525,
-  SEPOLIA = 11155111
+  SEPOLIA = 11155111,
+  LINEA = 59144
 }
 
 export enum SmartRouter {
