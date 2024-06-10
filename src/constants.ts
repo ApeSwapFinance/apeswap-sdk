@@ -35,7 +35,9 @@ export enum ChainId {
   INEVM = 2525,
   SEPOLIA = 11155111,
   LINEA = 59144,
-  LIGHTLINK = 1890
+  LIGHTLINK = 1890,
+  IOTA_TESTNET = 1075,
+  IOTA = 8822,
 }
 
 export enum SmartRouter {
