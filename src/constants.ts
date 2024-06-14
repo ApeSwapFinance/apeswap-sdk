@@ -38,6 +38,7 @@ export enum ChainId {
   LIGHTLINK = 1890,
   IOTA_TESTNET = 1075,
   IOTA = 8822,
+  BASE = 8453
 }
 
 export enum SmartRouter {
